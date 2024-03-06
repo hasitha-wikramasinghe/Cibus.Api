@@ -1,0 +1,7 @@
+﻿CREATE TABLE OrderPaymentStatusList
+(
+	Id INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
+	OrderPaymentStatusName VARCHAR(150) NOT NULL,
+
+	ClientId INT FOREIGN KEY REFERENCES Client(Id) NOT NULL
+);

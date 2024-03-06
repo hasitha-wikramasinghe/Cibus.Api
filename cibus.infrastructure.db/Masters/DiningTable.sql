@@ -1,0 +1,10 @@
+﻿CREATE TABLE DiningTable
+(
+	Id INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
+	TableNumber INT NULL,
+	TableDescription VARCHAR(MAX) NULL,
+	Capacity INT NULL,
+	IsAvailable BIT NOT NULL DEFAULT 1,
+
+	ClientId INT FOREIGN KEY REFERENCES Client(Id) NOT NULL
+);

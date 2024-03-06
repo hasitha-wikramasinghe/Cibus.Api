@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cibus.application\cibus.application.csproj" />
+    <ProjectReference Include="..\cibus.infrastructure.dbUpdate\cibus.infrastructure.dbUpdate.csproj" />
+    <ProjectReference Include="..\cibus.infrastructure\cibus.infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Masters\" />
+  </ItemGroup>
+
+</Project>

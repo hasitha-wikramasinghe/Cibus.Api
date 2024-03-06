@@ -1,0 +1,12 @@
+﻿CREATE TABLE UserRole
+(
+	UserId INT FOREIGN KEY REFERENCES ApplicationUser(Id) NOT NULL,
+	RoleId INT FOREIGN KEY REFERENCES Role(Id) NOT NULL,
+	IsDeleted BIT NOT NULL DEFAULT 0,
+	CreatedBy INT NULL,
+	CreatedOn DATE NULL,
+	ModifiedBy INT NULL,
+	ModifiedOn DATE NULL,
+
+	CONSTRAINT PK_UserRoles PRIMARY KEY(UserId, RoleId)
+);
