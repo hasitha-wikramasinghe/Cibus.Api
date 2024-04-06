@@ -17,11 +17,11 @@
     <None Remove="Scripts\20230612_0017_CreateUserRoleTable.sql" />
     <None Remove="Scripts\20230618_0058_CreatePermissionTable.sql" />
     <None Remove="Scripts\20230618_0059_CreateRolePermissionTable.sql" />
-    <None Remove="Scripts\20230621_2223_CreateVwUserRoles.sql" />
+    <None Remove="Scripts\20230621_2223_Create_vwUserRoles.sql" />
     <None Remove="Scripts\20230714_0030_InsertInitialRoles.sql" />
     <None Remove="Scripts\20230714_0034_InsertInitialPermissions.sql" />
     <None Remove="Scripts\20230714_0037_InsertInitialRolePermissions.sql" />
-    <None Remove="Scripts\20230720_2245_CreateVwRolePermissions.sql" />
+    <None Remove="Scripts\20230720_2245_Create_vwRolePermissions.sql" />
     <None Remove="Scripts\20231029_1448_Add_PasswordSalt_To_ApplicationUser.sql" />
   </ItemGroup>
 
@@ -37,11 +37,11 @@
     <EmbeddedResource Include="Scripts\20230618_0058_CreatePermissionTable.sql" />
     <EmbeddedResource Include="Scripts\20230618_0059_CreateRolePermissionTable.sql" />
     <EmbeddedResource Include="Scripts\20231029_1448_Add_PasswordSalt_To_ApplicationUser.sql" />
-    <EmbeddedResource Include="Scripts\20230720_2245_CreateVwRolePermissions.sql" />
+    <EmbeddedResource Include="Scripts\20230720_2245_Create_vwRolePermissions.sql" />
     <EmbeddedResource Include="Scripts\20230714_0037_InsertInitialRolePermissions.sql" />
     <EmbeddedResource Include="Scripts\20230714_0034_InsertInitialPermissions.sql" />
     <EmbeddedResource Include="Scripts\20230714_0030_InsertInitialRoles.sql" />
-    <EmbeddedResource Include="Scripts\20230621_2223_CreateVwUserRoles.sql" />
+    <EmbeddedResource Include="Scripts\20230621_2223_Create_vwUserRoles.sql" />
     <EmbeddedResource Include="Scripts\20230612_0017_CreateUserRoleTable.sql" />
     <EmbeddedResource Include="Scripts\20230612_0014_CreateRoleTable.sql" />
     <EmbeddedResource Include="Scripts\20230601_1709_CreateApplicationUserTable.sql" />
