@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.api", "cibus.api", "{5C872553-4A10-4DC3-84F9-D8213121B2A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.api", "src\cibus.api", "{5C872553-4A10-4DC3-84F9-D8213121B2A6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.application", "cibus.application", "{0E0B2009-571F-495D-A809-0874D0A64440}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.application", "src\cibus.application", "{0E0B2009-571F-495D-A809-0874D0A64440}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.domain", "cibus.domain", "{BE2C9157-02B1-45E7-8C99-ED10BBC24D13}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.domain", "src\cibus.domain", "{BE2C9157-02B1-45E7-8C99-ED10BBC24D13}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.infrastructure", "cibus.infrastructure", "{192AD0AF-2F9F-4925-BB8D-B4070D4626DE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cibus.infrastructure", "src\cibus.infrastructure", "{192AD0AF-2F9F-4925-BB8D-B4070D4626DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.api", "cibus.api\cibus.api.csproj", "{9C7965BE-E03A-411F-A2CC-62D99C10A206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.api", "src\cibus.api\cibus.api.csproj", "{9C7965BE-E03A-411F-A2CC-62D99C10A206}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.application", "cibus.application\cibus.application.csproj", "{3C3F816A-6FDF-404B-BA07-CF9C5A17C9F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.application", "src\cibus.application\cibus.application.csproj", "{3C3F816A-6FDF-404B-BA07-CF9C5A17C9F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.domain", "cibus.domain\cibus.domain.csproj", "{FCF8C93D-3624-435F-BA66-F220086AD546}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.domain", "src\cibus.domain\cibus.domain.csproj", "{FCF8C93D-3624-435F-BA66-F220086AD546}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.infrastructure", "cibus.infrastructure\cibus.infrastructure.csproj", "{8123C9C7-26F7-4F79-8FAA-EC07520923FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.infrastructure", "src\cibus.infrastructure\cibus.infrastructure.csproj", "{8123C9C7-26F7-4F79-8FAA-EC07520923FB}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "cibus.infrastructure.db", "cibus.infrastructure.db\cibus.infrastructure.db.sqlproj", "{01986126-56C5-4577-9903-34E4C401A87D}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "cibus.infrastructure.db", "src\cibus.infrastructure.db\cibus.infrastructure.db.sqlproj", "{01986126-56C5-4577-9903-34E4C401A87D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.infrastructure.dbUpdate", "cibus.infrastructure.dbUpdate\cibus.infrastructure.dbUpdate.csproj", "{F783F148-6CD4-4B9B-BDDB-A2326F4B3BC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cibus.infrastructure.dbUpdate", "src\cibus.infrastructure.dbUpdate\cibus.infrastructure.dbUpdate.csproj", "{F783F148-6CD4-4B9B-BDDB-A2326F4B3BC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0CD0FCDA-BD0B-4C82-8471-AF89E8561AFC}"
 EndProject
