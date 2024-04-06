@@ -120,12 +120,12 @@ namespace cibus.application.Repositories
         //    return isCorrect;
         //}
 
-        public async Task<List<UserRolesViewModel>> GetUserRoles(int userId)
+        public async Task<List<vwUserRoles>> GetUserRoles(int userId)
         {
             var query = "SELECT * FROM dbo.VwUserRoles WHERE UserId = @UserId";
             using (var connection = _context.CreateConnection())
             {
-                var userRoles = await connection.QueryAsync<UserRolesViewModel>(query, new { userId });
+                var userRoles = await connection.QueryAsync<vwUserRoles>(query, new { userId });
                 return userRoles.ToList();
             }
         }

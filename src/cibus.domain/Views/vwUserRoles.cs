@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cibus.domain.ViewModels
 {
-    public class UserRolesViewModel
+    public class vwUserRoles
     {
         public int UserId { get; set; }
         public int RoleId { get; set; }
