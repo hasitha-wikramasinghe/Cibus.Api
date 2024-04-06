@@ -23,7 +23,7 @@ namespace cibus.infrastructure.Services
             _secretKey = _configuration.GetSection("ApplicationSettings:Jwt_Secret").ToString();
         }
 
-        public string GenerateToken(UserRolesViewModel userRolesViewModel)
+        public string GenerateToken(vwUserRoles userRolesViewModel)
         {
             var roleId = userRolesViewModel.RoleId;
             IdentityOptions _options = new IdentityOptions();
