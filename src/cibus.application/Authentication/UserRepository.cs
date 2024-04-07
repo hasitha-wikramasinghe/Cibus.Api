@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cibus.application.Common.Authentication
+namespace cibus.application.Authentication
 {
     public class UserRepository : IUserRepository
     {
@@ -29,10 +29,10 @@ namespace cibus.application.Common.Authentication
             var getApplicationUserByIdQuery = AuthenticationScripts.GetApplicationUserByIdQuery;
             using (var connection = _context.CreateConnection())
             {
-                return await connection.QueryFirstOrDefaultAsync<ApplicationUser>(getApplicationUserByIdQuery, 
-                    new 
-                    { 
-                        id 
+                return await connection.QueryFirstOrDefaultAsync<ApplicationUser>(getApplicationUserByIdQuery,
+                    new
+                    {
+                        id
                     })
                     ?? throw new ArgumentOutOfRangeException($"No user found for id: {id}");
             }
@@ -53,9 +53,9 @@ namespace cibus.application.Common.Authentication
             var getApplicationUserByEmailQuery = AuthenticationScripts.GetApplicationUserByEmailQuery;
             using (var connection = _context.CreateConnection())
             {
-                var ApplicationUser = await connection.QueryFirstOrDefaultAsync<ApplicationUser>(getApplicationUserByEmailQuery, 
-                    new 
-                    { 
+                var ApplicationUser = await connection.QueryFirstOrDefaultAsync<ApplicationUser>(getApplicationUserByEmailQuery,
+                    new
+                    {
                         email
                     });
                 return ApplicationUser;
@@ -77,13 +77,13 @@ namespace cibus.application.Common.Authentication
             using (var connection = _context.CreateConnection())
             {
                 var applicationUser = await connection.QueryFirstOrDefaultAsync<ApplicationUser>(
-                    getApplicationUserByEmailQuery, 
-                    new 
-                    { 
-                        email 
+                    getApplicationUserByEmailQuery,
+                    new
+                    {
+                        email
                     });
 
-                if (applicationUser is not null) 
+                if (applicationUser is not null)
                 {
                     return true;
                 }
@@ -91,17 +91,17 @@ namespace cibus.application.Common.Authentication
             return false;
         }
 
-        public async Task<List<vwUserRoles>> GetUserRoles(int userId)
+        public async Task<vwUserRoles> GetUserRole(int userId)
         {
-            var getUserRolesByUserIdQuery = AuthenticationScripts.GetUserRolesByUserIdQuery;
+            var getUserRoleByUserIdQuery = AuthenticationScripts.GetUserRoleByUserIdQuery;
             using (var connection = _context.CreateConnection())
             {
-                var userRoles = await connection.QueryAsync<vwUserRoles>(getUserRolesByUserIdQuery, 
-                    new 
-                    { 
-                        userId 
+                var userRoles = await connection.QueryAsync<vwUserRoles>(getUserRoleByUserIdQuery,
+                    new
+                    {
+                        userId
                     });
-                return userRoles.ToList();
+                return userRoles.FirstOrDefault();
             }
         }
     }

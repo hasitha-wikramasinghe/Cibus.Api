@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace cibus.api.Common.Authentication
+namespace cibus.api.Authentication
 {
     [Route("api/Authentication")]
     [ApiController]
@@ -34,7 +34,7 @@ namespace cibus.api.Common.Authentication
         }
 
         [HttpPost("Authenticate")]
-        public async Task<ActionResult> Signin(SigninDto signinDto)
+        public async Task<ActionResult> Authenticate(SigninDto signinDto)
         {
 
             var validator = await _userBL.Authenticate(signinDto);

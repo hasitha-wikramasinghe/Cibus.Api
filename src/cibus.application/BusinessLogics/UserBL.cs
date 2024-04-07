@@ -79,8 +79,8 @@ namespace cibus.application.BusinessLogics
                 return status;
             }
 
-            var userRolesViewModel = await _userRepo.GetUserRoles(user.Id);
-            var token = _tokenService.GenerateToken(userRolesViewModel.FirstOrDefault());
+            var vwUserRole = await _userRepo.GetUserRole(user.Id);
+            var token = _tokenService.GenerateToken(vwUserRole);
             status.Add(1, token);
 
             return status;

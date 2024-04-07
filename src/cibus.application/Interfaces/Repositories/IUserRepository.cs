@@ -14,7 +14,7 @@ namespace cibus.application.Interfaces.Repositories
         Task<List<ApplicationUser>> Get();
         Task<ApplicationUser> Get(int id);
         Task<ApplicationUser> Get(string email);
-        Task<List<vwUserRoles>> GetUserRoles(int userId);
+        Task<vwUserRoles> GetUserRole(int userId);
 
         Task<int> CreateUser(ApplicationUser appUser);
         Task<bool> IsEmailAlreadyExists(string email);

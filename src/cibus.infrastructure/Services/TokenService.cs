@@ -25,19 +25,39 @@ namespace cibus.infrastructure.Services
         }
 
         public string GenerateToken(
-            vwUserRoles userRolesViewModel)
+            vwUserRoles vwUserRoles)
         {
-            IdentityOptions _options = new IdentityOptions();
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var claims = new Claim[]
             {
-                Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
+                new(JwtRegisteredClaimNames.Sub, vwUserRoles?.UserId.ToString())
             };
-            var TokenHandler = new JwtSecurityTokenHandler();
-            var securityToken = TokenHandler.CreateToken(tokenDescriptor);
-            var token = TokenHandler.WriteToken(securityToken);
-            return token;
+
+            var signingCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_secretKey)),
+                SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                "issuer",
+                "audience",
+                claims,
+                null,
+                DateTime.UtcNow.AddHours(1),
+                signingCredentials);
+
+            string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenValue;
+
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Expires = DateTime.UtcNow.AddDays(1),
+            //    Claims = claims,
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
+            //};
+            //var TokenHandler = new JwtSecurityTokenHandler();
+            //var securityToken = TokenHandler.CreateToken(tokenDescriptor);
+            //var token = TokenHandler.WriteToken(securityToken);
+            //return token;
         }
     }
 }
