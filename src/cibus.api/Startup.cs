@@ -1,5 +1,6 @@
 using cibus.application;
 using cibus.infrastructure;
+using cibus.infrastructure.dbUpdate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,7 @@ namespace cibus.api
             // Dependency Injection
             services.RegisterApplicationServices(Configuration);
             services.RegisterInfrastructureServices(Configuration);
+            services.RegisterDbUpServices(Configuration);
 
             // JWT Authentication 
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:Jwt_Secret"].ToString());

@@ -23,6 +23,7 @@
     <None Remove="Scripts\20230714_0037_InsertInitialRolePermissions.sql" />
     <None Remove="Scripts\20230720_2245_Create_vwRolePermissions.sql" />
     <None Remove="Scripts\20231029_1448_Add_PasswordSalt_To_ApplicationUser.sql" />
+    <None Remove="Scripts\20240407_1136_Update_ApplicationUser.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Scripts\20230618_0058_CreatePermissionTable.sql" />
     <EmbeddedResource Include="Scripts\20230618_0059_CreateRolePermissionTable.sql" />
+    <EmbeddedResource Include="Scripts\20240407_1136_Update_ApplicationUser.sql" />
     <EmbeddedResource Include="Scripts\20231029_1448_Add_PasswordSalt_To_ApplicationUser.sql" />
     <EmbeddedResource Include="Scripts\20230720_2245_Create_vwRolePermissions.sql" />
     <EmbeddedResource Include="Scripts\20230714_0037_InsertInitialRolePermissions.sql" />

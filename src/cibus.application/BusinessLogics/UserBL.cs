@@ -53,11 +53,6 @@ namespace cibus.application.BusinessLogics
             ApplicationUser appUser = _mapper.Map<ApplicationUser>(appUserDTO);
             SetPasswordHashAndPasswordSalt(appUser, appUserDTO.Password);
 
-            appUser.CreatedBy = 1003; // TO DO: This should implement with real user Id who sends the request after implementing jwt auth properly
-            appUser.CreatedOn = DateTime.Today;
-            appUser.ModifiedBy = null;
-            appUser.ModifiedOn = null;
-
             return await _userRepo.CreateUser(appUser);
         }
 
@@ -65,7 +60,7 @@ namespace cibus.application.BusinessLogics
         {
             var passwordEncryptionResult = _passwordSecurityService.GetPasswordHashAndPasswordSalt(password);
 
-            appUser.HashedPassword = passwordEncryptionResult[1];
+            appUser.PasswordHash = passwordEncryptionResult[1];
             appUser.PasswordSalt = passwordEncryptionResult[2];
 
             return appUser;

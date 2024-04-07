@@ -7,34 +7,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace cibus.api.Controllers.Auth
+namespace cibus.api.Common.Authentication
 {
-    [Route("api/[controller]")]
+    [Route("api/Authentication")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private readonly IUserBL _userBL;
-        public AuthController(IUserBL userBL)
+        public AuthenticationController(IUserBL userBL)
         {
             _userBL = userBL;
         }
 
-        [HttpPost("signup")]
+        [HttpPost("Signup")]
         public async Task<ActionResult> Register(ApplicationUserForCreationDto appUserDto)
         {
             // 0 - Notfound || 1 - found
             int isEmailExists = await _userBL.IsEmailAlreadyExists(appUserDto.Email);
             if (isEmailExists == 1) return BadRequest(new { Message = "Email is already taken, Please try again with another email." });
-            int result = await _userBL.CreateUser(appUserDto); // result should be new users's id 
-            if (result > 0)
+            int createdUserId = await _userBL.CreateUser(appUserDto);
+            if (createdUserId > 0)
             {
-                return Ok(new { CreatedUserId = result });
+                return Ok(new { CreatedUserId = createdUserId });
             }
 
             return new ObjectResult(new { Message = "Something went wrong, Please try again later." });
         }
 
-        [HttpPost("signin")]
+        [HttpPost("Authenticate")]
         public async Task<ActionResult> Signin(SigninDto signinDto)
         {
 
