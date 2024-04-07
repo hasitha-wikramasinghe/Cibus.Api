@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cibus.application.Repositories
+namespace cibus.application.Common.Authentication
 {
     public class PermissionRepository : IPermissionRepository
     {

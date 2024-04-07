@@ -20,18 +20,17 @@ namespace cibus.api.Common.Authentication
         }
 
         [HttpPost("Signup")]
-        public async Task<ActionResult> Register(ApplicationUserForCreationDto appUserDto)
+        public async Task<ActionResult> Register(ApplicationUserDto applicationUserDto)
         {
-            // 0 - Notfound || 1 - found
-            int isEmailExists = await _userBL.IsEmailAlreadyExists(appUserDto.Email);
-            if (isEmailExists == 1) return BadRequest(new { Message = "Email is already taken, Please try again with another email." });
-            int createdUserId = await _userBL.CreateUser(appUserDto);
+            if (await _userBL.IsEmailAlreadyExists(applicationUserDto.Email)) return BadRequest("Email is already taken, please try with another email.");
+
+            int createdUserId = await _userBL.CreateUser(applicationUserDto);
             if (createdUserId > 0)
             {
                 return Ok(new { CreatedUserId = createdUserId });
             }
 
-            return new ObjectResult(new { Message = "Something went wrong, Please try again later." });
+            return StatusCode(500);
         }
 
         [HttpPost("Authenticate")]
@@ -40,8 +39,13 @@ namespace cibus.api.Common.Authentication
 
             var validator = await _userBL.Authenticate(signinDto);
 
-            if (validator.ContainsKey(-1)) return BadRequest(new { Message = validator[-1] });
-            if (validator.ContainsKey(0)) return BadRequest(new { Message = validator[0] });
+            if (validator.ContainsKey(-1) || validator.ContainsKey(0))
+            {
+                return BadRequest(new
+                {
+                    Message = "Invalid credentials, try again with valid credentials"
+                });
+            }
 
             return Ok(new { Token = validator[1] });
         }

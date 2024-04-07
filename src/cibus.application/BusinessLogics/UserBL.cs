@@ -33,27 +33,57 @@ namespace cibus.application.BusinessLogics
             _tokenService = tokenService;
         }
 
-        public async Task<List<ApplicationUserForRetrieveDto>> Get()
+        public async Task<List<ApplicationUserDto>> Get()
         {
-            return _mapper.Map<List<ApplicationUserForRetrieveDto>>(await _userRepo.Get());
+            return _mapper.Map<List<ApplicationUserDto>>(await _userRepo.Get());
         }
 
-        public async Task<ApplicationUserForRetrieveDto> Get(int id)
+        public async Task<ApplicationUserDto> Get(int id)
         {
-            return _mapper.Map<ApplicationUserForRetrieveDto>(await _userRepo.Get(id));
+            return _mapper.Map<ApplicationUserDto>(await _userRepo.Get(id));
         }
 
-        public async Task<ApplicationUserForRetrieveDto> Get(string email)
+        public async Task<ApplicationUserDto> Get(string email)
         {
-            return _mapper.Map<ApplicationUserForRetrieveDto>(await _userRepo.Get(email));
+            return _mapper.Map<ApplicationUserDto>(await _userRepo.Get(email));
         }
 
-        public async Task<int> CreateUser(ApplicationUserForCreationDto appUserDTO)
+        public async Task<int> CreateUser(ApplicationUserDto appUserDTO)
         {
-            ApplicationUser appUser = _mapper.Map<ApplicationUser>(appUserDTO);
-            SetPasswordHashAndPasswordSalt(appUser, appUserDTO.Password);
+            ApplicationUser applicationUser = _mapper.Map<ApplicationUser>(appUserDTO);
+            SetPasswordHashAndPasswordSalt(applicationUser, appUserDTO.Password);
 
-            return await _userRepo.CreateUser(appUser);
+            return await _userRepo.CreateUser(applicationUser);
+        }
+
+        public async Task<bool> IsEmailAlreadyExists(string email)
+        {
+            return await _userRepo.IsEmailAlreadyExists(email);
+        }
+
+        public async Task<Dictionary<int, string>> Authenticate(SigninDto signinDto)
+        {
+            Dictionary<int, string> status = new Dictionary<int, string>();
+
+            var user = await _userRepo.Get(signinDto.Email);
+            if (user == null)
+            {
+                status.Add(-1, "Invalid email, Please try again with a valid email address.");
+                return status;
+            }
+
+            var isPasswordValid = _passwordSecurityService.ValidatePassword(user, signinDto.Password);
+            if (!isPasswordValid)
+            {
+                status.Add(0, "Password is incorrect, Please try again with correct password.");
+                return status;
+            }
+
+            var userRolesViewModel = await _userRepo.GetUserRoles(user.Id);
+            var token = _tokenService.GenerateToken(userRolesViewModel.FirstOrDefault());
+            status.Add(1, token);
+
+            return status;
         }
 
         private ApplicationUser SetPasswordHashAndPasswordSalt(ApplicationUser appUser, string password)
@@ -64,37 +94,6 @@ namespace cibus.application.BusinessLogics
             appUser.PasswordSalt = passwordEncryptionResult[2];
 
             return appUser;
-        }
-
-        public async Task<int> IsEmailAlreadyExists(string email)
-        {
-            return await _userRepo.IsEmailAlreadyExists(email);
-        }
-
-        public async Task<Dictionary<int, string>> Authenticate(SigninDto signinDto)
-        {
-            Dictionary<int, string> status = new Dictionary<int, string>();
-
-            //signinDto.Password = _passwordSecurityService.Encrypt(signinDto.Password);
-
-            var user = await _userRepo.Get(signinDto.Email);
-            if (user == null)
-            {
-                status.Add(-1, "Invalid email, Please try again with a valid email address.");
-                return status;
-            }
-
-            var resss = _passwordSecurityService.ValidatePassword(user, signinDto.Password);
-            if (resss == false)
-            {
-                status.Add(0, "Password is incorrect, Please try again with correct password.");
-                return status;
-            }
-
-            var userRolesViewModel = await _userRepo.GetUserRoles(user.Id);
-            var token = _tokenService.GenerateToken(userRolesViewModel.FirstOrDefault());
-            status.Add(1, token);
-            return status;
         }
     }
 }

@@ -10,12 +10,12 @@ namespace cibus.application.Interfaces.BusinessLogics
 {
     public interface IUserBL
     {
-        Task<List<ApplicationUserForRetrieveDto>> Get();
-        Task<ApplicationUserForRetrieveDto> Get(int id);
-        Task<ApplicationUserForRetrieveDto> Get(string email);
+        Task<List<ApplicationUserDto>> Get();
+        Task<ApplicationUserDto> Get(int id);
+        Task<ApplicationUserDto> Get(string email);
+        Task<bool> IsEmailAlreadyExists(string email);
 
-        Task<int> CreateUser(ApplicationUserForCreationDto appUserDTO);
-        Task<int> IsEmailAlreadyExists(string email);
+        Task<int> CreateUser(ApplicationUserDto applicationUserDTO);
         Task<Dictionary<int, string>> Authenticate(SigninDto signinDto);
 
     }

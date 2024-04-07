@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using cibus.application.BusinessLogics;
+using cibus.application.Common.Authentication;
 using cibus.application.Interfaces.BusinessLogics;
 using cibus.application.Interfaces.Repositories;
 using cibus.application.MapProfiles;
-using cibus.application.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
