@@ -15,8 +15,4 @@
     <ProjectReference Include="..\cibus.infrastructure\cibus.infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Masters\" />
-  </ItemGroup>
-
 </Project>

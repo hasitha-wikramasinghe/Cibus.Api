@@ -25,15 +25,15 @@ namespace cibus.infrastructure.Services
 
         public string GenerateToken(vwUserRoles userRolesViewModel)
         {
-            var roleId = userRolesViewModel.RoleId;
+            //var roleId = userRolesViewModel.RoleId;
             IdentityOptions _options = new IdentityOptions();
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new ("UserId", userRolesViewModel.UserId.ToString()),
-                    new ("RoleId", userRolesViewModel.RoleId.ToString()),
+                    //new ("UserId", userRolesViewModel.UserId.ToString()),
+                    //new ("RoleId", userRolesViewModel.RoleId.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)

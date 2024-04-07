@@ -54,7 +54,7 @@ namespace cibus.infrastructure.Services
 
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if (computedHash[i] != appUser.HashedPassword[i])
+                if (computedHash[i] != appUser.PasswordHash[i])
                 {
                     return false;
                 }

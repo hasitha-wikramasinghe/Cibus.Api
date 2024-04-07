@@ -56,8 +56,8 @@ namespace cibus.application.Repositories
 
         public async Task<int> CreateUser(ApplicationUser appUser)
         {
-            var query = "insert into dbo.ApplicationUser (Email, HashedPassword, FirstName, LastName, NIC, DOB, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, ClientId, PasswordSalt) " +
-                "values (@Email, @HashedPassword, @FirstName, @LastName, @NIC, @DOB, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn, @ClientId, @PasswordSalt)" +
+            var query = "insert into dbo.ApplicationUser (Email, PasswordHash, FirstName, LastName, NIC, DOB, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, ClientId, PasswordSalt) " +
+                "values (@Email, @PasswordHash, @FirstName, @LastName, @NIC, @DOB, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn, @ClientId, @PasswordSalt)" +
                 "select cast(scope_identity() as int)";
 
             //var parameters = new DynamicParameters();
@@ -85,7 +85,7 @@ namespace cibus.application.Repositories
                 ModifiedBy = appUser.ModifiedBy,
                 ModifiedOn = appUser.ModifiedOn,
                 ClientId = appUser.ClientId,
-                HashedPassword = appUser.HashedPassword,
+                PasswordHash = appUser.PasswordHash,
                 PasswordSalt = appUser.PasswordSalt
             };
 
