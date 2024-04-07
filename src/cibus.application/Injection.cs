@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using cibus.application.BusinessLogics;
-using cibus.application.Common.Authentication;
+using cibus.application.Authentication;
 using cibus.application.Interfaces.BusinessLogics;
 using cibus.application.Interfaces.Repositories;
 using cibus.application.MapProfiles;

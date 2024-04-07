@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cibus.application.Common.Authentication
+namespace cibus.application.Authentication
 {
     public class PermissionRepository : IPermissionRepository
     {
@@ -18,10 +18,14 @@ namespace cibus.application.Common.Authentication
         }
         public async Task<IEnumerable<string>> GetPermissionsByUserIdAsync(int userId)
         {
-            var query = "SELECT PermissionName FROM VwRolePermissions WHERE UserId = @UserId";
+            var getPermissionNamesByUserId = AuthenticationScripts.GetPermissionNamesByUserId;
             using (var connection = _context.CreateConnection())
             {
-                var permissions = await connection.QueryAsync<string>(query, new { userId });
+                var permissions = await connection.QueryAsync<string>(getPermissionNamesByUserId,
+                    new
+                    {
+                        userId
+                    });
                 return permissions;
             }
         }

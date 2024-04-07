@@ -25,7 +25,7 @@ namespace cibus.infrastructure.Authentication
             PermissionRequirement requirement)
         {
             string userId = context.User.Claims.FirstOrDefault(
-                x => x.Type == "UserId")?.Value;
+                x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
 
             if (!Int32.TryParse(userId, out Int32 parsedRoleId))
             {

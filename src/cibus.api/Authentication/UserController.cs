@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace cibus.api.Common.Authentication
+namespace cibus.api.Authentication
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,6 +28,7 @@ namespace cibus.api.Common.Authentication
         }
 
         [HttpGet("{id}")]
+        [HasPermission(Permission.ReadUser)]
         public async Task<ActionResult<ApplicationUserDto>> Get(int id)
         {
             return Ok(await _userBL.Get(id));
