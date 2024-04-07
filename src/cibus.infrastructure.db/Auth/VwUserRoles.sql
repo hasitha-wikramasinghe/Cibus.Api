@@ -1,4 +1,4 @@
-﻿CREATE VIEW [dbo].[VwUserRoles] AS
+﻿CREATE VIEW [dbo].[vwUserRoles] AS
 SELECT 
 UserRole.UserId UserId,
 UserRole.RoleId RoleId,

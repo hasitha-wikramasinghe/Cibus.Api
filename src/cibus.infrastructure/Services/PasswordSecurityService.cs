@@ -23,10 +23,6 @@ namespace cibus.infrastructure.Services
 
         public Dictionary<int, byte[]> GetPasswordHashAndPasswordSalt(string password)
         {
-            //if (string.IsNullOrEmpty(password)) return "";
-            //password += key;
-            //var passwordBytes = Encoding.UTF8.GetBytes(password);
-            //return Convert.ToBase64String(passwordBytes);
             using var hmac = new HMACSHA512();
 
             Dictionary<int, byte[]> passwordEncryptionResult = new Dictionary<int, byte[]>();
@@ -42,12 +38,6 @@ namespace cibus.infrastructure.Services
 
         public bool ValidatePassword(ApplicationUser appUser, string password)
         {
-            //if (string.IsNullOrEmpty(hashedPassword)) return "";
-            //var base64EncodeBytes = Convert.FromBase64String(hashedPassword);
-            //var result = Encoding.UTF8.GetString(base64EncodeBytes);
-            //result = result.Substring(0, result.Length - key.Length);
-            //return result;
-            
             using var hmac = new HMACSHA512(appUser.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));

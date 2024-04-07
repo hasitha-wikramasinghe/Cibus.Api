@@ -17,24 +17,20 @@ namespace cibus.infrastructure.Services
     {
         private readonly IConfiguration _configuration;
         private readonly string _secretKey;
-        public TokenService(IConfiguration configuration)
+        public TokenService(
+            IConfiguration configuration)
         {
             _configuration = configuration;
             _secretKey = _configuration.GetSection("ApplicationSettings:Jwt_Secret").ToString();
         }
 
-        public string GenerateToken(vwUserRoles userRolesViewModel)
+        public string GenerateToken(
+            vwUserRoles userRolesViewModel)
         {
-            //var roleId = userRolesViewModel.RoleId;
             IdentityOptions _options = new IdentityOptions();
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    //new ("UserId", userRolesViewModel.UserId.ToString()),
-                    //new ("RoleId", userRolesViewModel.RoleId.ToString()),
-                }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
             };

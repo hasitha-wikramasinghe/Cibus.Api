@@ -15,9 +15,8 @@ namespace cibus.application.MapProfiles
         public DTOProfileMap()
         {
             #region ApplicationUser
-            CreateMap<ApplicationUserForCreationDto, ApplicationUser>();
-
-            CreateMap<ApplicationUser, ApplicationUserForRetrieveDto>();
+            CreateMap<ApplicationUserDto, ApplicationUser>()
+                .ReverseMap();
             #endregion
         }
     }

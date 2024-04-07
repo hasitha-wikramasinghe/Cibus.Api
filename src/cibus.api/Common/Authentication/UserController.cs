@@ -22,14 +22,13 @@ namespace cibus.api.Common.Authentication
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult<List<ApplicationUserForRetrieveDto>>> Get()
+        public async Task<ActionResult<List<ApplicationUserDto>>> Get()
         {
             return Ok(await _userBL.Get());
         }
 
-        [HasPermission(Permission.ReadUser)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUserForRetrieveDto>> Get(int id)
+        public async Task<ActionResult<ApplicationUserDto>> Get(int id)
         {
             return Ok(await _userBL.Get(id));
         }

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\cibus.domain\cibus.domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
