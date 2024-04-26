@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cibus.infrastructure.Services
+namespace cibus.infrastructure.Authentication
 {
     public class PasswordSecurityService : IPasswordSecurityService
     {

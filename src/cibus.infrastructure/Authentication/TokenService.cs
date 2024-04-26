@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cibus.infrastructure.Services
+namespace cibus.infrastructure.Authentication
 {
     public class TokenService : ITokenService
     {
