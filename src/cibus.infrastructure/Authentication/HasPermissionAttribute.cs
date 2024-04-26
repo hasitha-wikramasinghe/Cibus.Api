@@ -1,18 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace cibus.infrastructure.Authentication
+namespace cibus.infrastructure.Authentication;
+public sealed class HasPermissionAttribute : AuthorizeAttribute
 {
-    public sealed class HasPermissionAttribute : AuthorizeAttribute
+    public HasPermissionAttribute(Permission permission) 
+        : base(policy: permission.ToString())
     {
-        public HasPermissionAttribute(Permission permission) 
-            : base(policy: permission.ToString())
-        {
 
-        }
     }
 }

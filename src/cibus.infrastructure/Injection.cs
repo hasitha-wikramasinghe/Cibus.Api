@@ -3,7 +3,6 @@ using cibus.application.Interfaces.Services;
 using cibus.domain.Entities;
 using cibus.infrastructure.Authentication;
 using cibus.infrastructure.Context;
-using cibus.infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
