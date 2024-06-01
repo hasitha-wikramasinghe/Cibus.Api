@@ -15,8 +15,8 @@ namespace cibus.application.Authentication
 
         public const string GetPermissionNamesByUserId = "SELECT PermissionName FROM VwRolePermissions WHERE UserId = @UserId";
 
-        public const string CreateUserCommand = "INSERT INTO dbo.ApplicationUser (Email, PasswordHash, FirstName, LastName, NIC, DOB, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, ClientId, PasswordSalt) " +
-                "VALUES (@Email, @PasswordHash, @FirstName, @LastName, @NIC, @DOB, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn, @ClientId, @PasswordSalt)" +
+        public const string CreateUserCommand = "INSERT INTO dbo.ApplicationUser (Email, PasswordHash, FirstName, LastName, NIC, DOB, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, EntityId, PasswordSalt) " +
+                "VALUES (@Email, @PasswordHash, @FirstName, @LastName, @NIC, @DOB, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn, @EntityId, @PasswordSalt)" +
                 "SELECT CAST(SCOPE_IDENTITY() AS INT)";
     }
 }

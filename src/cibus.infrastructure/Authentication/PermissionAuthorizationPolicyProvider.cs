@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿#nullable enable
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace cibus.infrastructure.Authentication
 
         public override async Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
         {
-            AuthorizationPolicy policy = await base.GetPolicyAsync(policyName);
+            AuthorizationPolicy? policy = await base.GetPolicyAsync(policyName);
 
             if (policy is not null)
             {

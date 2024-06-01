@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace cibus.domain.Entities
 {
-    public class Client
+    public class Entity
     {
         public int Id { get; set; }
-        public string ClientName { get; set; }
+        public string EntityName { get; set; }
+        public string Currency { get; set; }
         public bool IsDeleted { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

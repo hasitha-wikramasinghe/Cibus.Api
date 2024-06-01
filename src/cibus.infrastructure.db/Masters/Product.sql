@@ -13,5 +13,7 @@
 	ModifiedOn DATE NULL,
 
 	CategoryId INT FOREIGN KEY REFERENCES Category(Id) NULL,
-	ClientId INT FOREIGN KEY REFERENCES Client(Id) NOT NULL
+	EntityId INT NULL,
+
+	CONSTRAINT FK_Product_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );

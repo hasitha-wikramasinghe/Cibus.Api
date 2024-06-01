@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authentication\ApplicationUser.sql" />
-    <Build Include="Masters\Client.sql" />
+    <Build Include="Masters\Entity.sql" />
     <Build Include="Authentication\Role.sql" />
     <Build Include="Authentication\UserRole.sql" />
     <Build Include="Authentication\Permission.sql" />
@@ -77,7 +77,7 @@
     <Build Include="Masters\OrderStatusList.sql" />
     <Build Include="Masters\OrderTypeList.sql" />
     <Build Include="Masters\OrderPaymentStatusList.sql" />
-    <Build Include="FoodOrder\Order.sql" />
+    <Build Include="FoodOrder\FoodOrder.sql" />
     <Build Include="FoodOrder\OrderChef.sql" />
     <Build Include="FoodOrder\OrderProduct.sql" />
   </ItemGroup>
