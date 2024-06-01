@@ -10,6 +10,8 @@ namespace cibus.domain.Entities
     {
         public int Id { get; set; }
         public string RoleName { get; set; }
+
+        public int? EntityId { get; set; }
         public bool IsDeleted { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

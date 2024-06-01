@@ -1,9 +1,9 @@
 ﻿CREATE VIEW [dbo].[VwRolePermissions] AS 
 SELECT 
-UserRole.UserId,
 RolePermission.RoleId, 
 RolePermission.PermissionId, 
+Role.RoleName,
 Permission.PermissionName 
 FROM [dbo].[RolePermission]
-INNER JOIN [dbo].[Permission] ON RolePermission.PermissionId = Permission.id
-INNER JOIN [dbo].[UserRole] ON RolePermission.RoleId = UserRole.RoleId;
+INNER JOIN [dbo].[Permission] ON RolePermission.PermissionId = Permission.Id AND RolePermission.EntityId = Permission.EntityId
+INNER JOIN [dbo].[Role] ON RolePermission.RoleId = Role.Id AND RolePermission.EntityId = Role.EntityId;

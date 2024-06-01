@@ -8,11 +8,13 @@
 	LastName VARCHAR(50) NULL,
 	NIC VARCHAR(30) NULL,
 	DOB DATE NULL,
+
 	IsDeleted BIT NOT NULL DEFAULT 0,
 	CreatedBy INT NULL,
 	CreatedOn DATE NULL,
 	ModifiedBy INT NULL,
 	ModifiedOn DATE NULL,
+	EntityId INT NULL,
 
-	ClientId INT FOREIGN KEY REFERENCES Client(Id)
+	CONSTRAINT FK_ApplicationUser_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );

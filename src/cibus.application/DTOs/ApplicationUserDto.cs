@@ -15,6 +15,6 @@ namespace cibus.application.DTOs
         public string NIC { get; set; }
         public DateTime DOB { get; set; }
 
-        public int ClientId { get; set; }
+        public int EntityId { get; set; }
     }
 }

@@ -29,12 +29,12 @@ namespace cibus.application
 
             #region Business Logic
             service.AddScoped<IUserBL, UserBL>();
-            service.AddScoped<IPermissionBL, PermissionBL>();
+            service.AddSingleton<IPermissionBL, PermissionBL>();
             #endregion
 
             #region Repositories
             service.AddScoped<IUserRepository, UserRepository>();
-            service.AddScoped<IPermissionRepository, PermissionRepository>();
+            service.AddSingleton<IPermissionRepository, PermissionRepository>();
             #endregion 
 
             return service;

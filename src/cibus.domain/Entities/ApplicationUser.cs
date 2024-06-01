@@ -18,6 +18,6 @@ namespace cibus.domain.Entities
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
 
-        public int? ClientId { get; set; }
+        public int? EntityId { get; set; }
     }
 }

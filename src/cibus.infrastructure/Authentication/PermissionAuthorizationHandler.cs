@@ -13,10 +13,11 @@ namespace cibus.infrastructure.Authentication
     public class PermissionAuthorizationHandler
         : AuthorizationHandler<PermissionRequirement>
     {
-        private readonly IPermissionBL _permissionBL;
-        public PermissionAuthorizationHandler(IPermissionBL permissionBL)
+        private readonly IPermissionBL _permissionBusinessLogic;
+        public PermissionAuthorizationHandler(
+            IPermissionBL permissionBusinessLogic)
         {
-            _permissionBL = permissionBL;
+            _permissionBusinessLogic = permissionBusinessLogic;
         }
 
         // TODO:: instead of fetching user permissions from the database, need to cache the user permissions when user get the token
@@ -32,12 +33,14 @@ namespace cibus.infrastructure.Authentication
                 return;
             }
 
-            IEnumerable<string> permissions = await _permissionBL.GetPermissionsByUserIdAsync(Convert.ToInt32(userId));
+            IEnumerable<string> permissions = await _permissionBusinessLogic.GetPermissionsByUserIdAsync(Convert.ToInt32(userId));
 
             if (permissions.Contains(requirement.Permission))
             {
                 context.Succeed(requirement);
             }
+
+            context.Fail();
         }
     }
 }

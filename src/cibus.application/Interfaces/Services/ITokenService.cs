@@ -9,6 +9,6 @@ namespace cibus.application.Interfaces.Services
 {
     public interface ITokenService
     {
-        string GenerateToken(vwUserRoles userRolesViewModel);
+        string GenerateToken(int userId);
     }
 }

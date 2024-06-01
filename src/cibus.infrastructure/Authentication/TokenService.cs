@@ -17,47 +17,61 @@ namespace cibus.infrastructure.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly string _secretKey;
+        private readonly string _audience;
+        private readonly string _issuer;
+
         public TokenService(
             IConfiguration configuration)
         {
             _configuration = configuration;
-            _secretKey = _configuration.GetSection("ApplicationSettings:Jwt_Secret").ToString();
+            _secretKey = _configuration.GetSection("Authentication:Jwt_Secret").ToString();
+            _audience = _configuration.GetSection("Authentication:Audience").ToString();
+            _issuer = _configuration.GetSection("Authentication:Issuer").ToString();
         }
 
         public string GenerateToken(
-            vwUserRoles vwUserRoles)
+            int userId)
         {
-            var claims = new Claim[]
+            IdentityOptions _options = new IdentityOptions();
+
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                new(JwtRegisteredClaimNames.Sub, vwUserRoles?.UserId.ToString())
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, userId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
             };
 
-            var signingCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(_secretKey)),
-                SecurityAlgorithms.HmacSha256);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.WriteToken(securityToken);
 
-            var token = new JwtSecurityToken(
-                "issuer",
-                "audience",
-                claims,
-                null,
-                DateTime.UtcNow.AddHours(1),
-                signingCredentials);
+            return token;
 
-            string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-            return tokenValue;
-
-            //var tokenDescriptor = new SecurityTokenDescriptor
+            // TODO:: Legacy code - review and refactor needs here
+            //var claims = new Claim[]
             //{
-            //    Expires = DateTime.UtcNow.AddDays(1),
-            //    Claims = claims,
-            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
+            //    new(JwtRegisteredClaimNames.Sub, vwUserRoles?.UserId.ToString())
             //};
-            //var TokenHandler = new JwtSecurityTokenHandler();
-            //var securityToken = TokenHandler.CreateToken(tokenDescriptor);
-            //var token = TokenHandler.WriteToken(securityToken);
-            //return token;
+
+            //var signingCredentials = new SigningCredentials(
+            //    new SymmetricSecurityKey(
+            //        Encoding.UTF8.GetBytes(_secretKey)),
+            //    SecurityAlgorithms.HmacSha256);
+
+            //var token = new JwtSecurityToken(
+            //    _issuer,
+            //    _audience,
+            //    claims,
+            //    null,
+            //    DateTime.UtcNow.AddHours(1),
+            //    signingCredentials);
+
+            //string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+            //return tokenValue;
         }
     }
 }

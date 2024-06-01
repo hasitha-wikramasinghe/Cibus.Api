@@ -6,5 +6,7 @@
 	Capacity INT NULL,
 	IsAvailable BIT NOT NULL DEFAULT 1,
 
-	ClientId INT FOREIGN KEY REFERENCES Client(Id) NOT NULL
+	EntityId INT NULL,
+
+	CONSTRAINT FK_DiningTable_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );

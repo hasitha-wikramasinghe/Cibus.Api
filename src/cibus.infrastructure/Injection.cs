@@ -26,8 +26,8 @@ namespace cibus.infrastructure
             service.AddSingleton<IDapperContext, DapperContext>();
 
             // Auth
-            service.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
             service.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            service.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
             return service;
         }

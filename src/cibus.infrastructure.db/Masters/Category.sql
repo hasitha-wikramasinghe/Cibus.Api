@@ -5,7 +5,7 @@
 	CreatedBy INT NULL,
 	CreatedOn DATE NULL,
 	ModifiedBy INT NULL,
-	ModifiedOn DATE NULL,
+	EntityId INT NULL,
 
-	ClientId INT FOREIGN KEY REFERENCES Client(Id) NOT NULL
+	CONSTRAINT FK_Category_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );
