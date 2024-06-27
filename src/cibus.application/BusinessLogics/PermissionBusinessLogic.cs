@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace cibus.application.BusinessLogics
 {
-    public class PermissionBL : IPermissionBL
+    public class PermissionBusinessLogic : IPermissionBusinessLogic
     {
-        private readonly IPermissionRepository _permissionRepo;
-        public PermissionBL(IPermissionRepository permissionRepo)
+        private readonly IPermissionRepository _permissionRepository;
+        public PermissionBusinessLogic(IPermissionRepository permissionRepository)
         {
-            _permissionRepo = permissionRepo;
+            _permissionRepository = permissionRepository;
         }
         public Task<IEnumerable<string>> GetPermissionsByUserIdAsync(int userId)
         {
-            return _permissionRepo.GetPermissionsByUserIdAsync(userId);
+            return _permissionRepository.GetPermissionsByUserIdAsync(userId);
         }
     }
 }

@@ -13,9 +13,9 @@ namespace cibus.infrastructure.Authentication
     public class PermissionAuthorizationHandler
         : AuthorizationHandler<PermissionRequirement>
     {
-        private readonly IPermissionBL _permissionBusinessLogic;
+        private readonly IPermissionBusinessLogic _permissionBusinessLogic;
         public PermissionAuthorizationHandler(
-            IPermissionBL permissionBusinessLogic)
+            IPermissionBusinessLogic permissionBusinessLogic)
         {
             _permissionBusinessLogic = permissionBusinessLogic;
         }
@@ -26,21 +26,20 @@ namespace cibus.infrastructure.Authentication
             PermissionRequirement requirement)
         {
             string userId = context.User.Claims.FirstOrDefault(
-                x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
+                x => x.Type == "userId")?.Value;
 
-            if (!Int32.TryParse(userId, out Int32 parsedRoleId))
+            if (string.IsNullOrEmpty(userId) || !Int32.TryParse(userId, out Int32 parsedUserId))
             {
+                context.Fail();
                 return;
             }
 
-            IEnumerable<string> permissions = await _permissionBusinessLogic.GetPermissionsByUserIdAsync(Convert.ToInt32(userId));
+            IEnumerable<string> permissions = await _permissionBusinessLogic.GetPermissionsByUserIdAsync(parsedUserId);
 
             if (permissions.Contains(requirement.Permission))
             {
                 context.Succeed(requirement);
             }
-
-            context.Fail();
         }
     }
 }

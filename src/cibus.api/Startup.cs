@@ -42,12 +42,11 @@ namespace cibus.api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "cibus.api", Version = "v1" });
             });
 
-            // Dependency Injection
+
             services.RegisterApplicationServices(Configuration);
             services.RegisterInfrastructureServices(Configuration);
             services.RegisterDbUpServices(Configuration);
 
-            // JWT Authentication 
             var key = Encoding.UTF8.GetBytes(Configuration["Authentication:Jwt_Secret"].ToString());
 
             services.AddAuthentication(x =>
@@ -58,6 +57,7 @@ namespace cibus.api
             }).AddJwtBearer(x =>
             {
                 x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -71,14 +71,10 @@ namespace cibus.api
                 };
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-                .RequireAuthenticatedUser()
-                .Build();
-            });
+            services.AddAuthorization();
 
             services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

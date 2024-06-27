@@ -1,4 +1,6 @@
-﻿using cibus.application.DTOs;
+﻿#nullable enable
+
+using cibus.application.DTOs;
 using cibus.domain.Entities;
 using cibus.domain.ViewModels;
 using System;
@@ -11,10 +13,9 @@ namespace cibus.application.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<ApplicationUser>> Get();
-        Task<ApplicationUser> Get(int id);
-        Task<ApplicationUser> Get(string email);
-        Task<vwUserRoles> GetUserRole(int userId);
+        Task<List<ApplicationUser>?> Get();
+        Task<ApplicationUser?> Get(int id);
+        Task<ApplicationUser?> Get(string email);
 
         Task<int> CreateUser(ApplicationUser appUser);
         Task<bool> IsEmailAlreadyExists(string email);

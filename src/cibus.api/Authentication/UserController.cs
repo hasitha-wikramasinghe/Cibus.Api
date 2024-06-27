@@ -15,23 +15,37 @@ namespace cibus.api.Authentication
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserBL _userBL;
-        public UserController(IUserBL userBL)
+        private readonly IUserBusinessLogic _userBusinessLogic;
+        public UserController(IUserBusinessLogic userBusinessLogic)
         {
-            _userBL = userBL;
+            _userBusinessLogic = userBusinessLogic;
         }
 
         [HttpGet("all")]
         public async Task<ActionResult<List<ApplicationUserDto>>> Get()
         {
-            return Ok(await _userBL.Get());
+            var users = await _userBusinessLogic.Get();
+
+            if (users is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        [HasPermission(Permission.ReadUser)]
+        [HasPermission(Permission.AccessUser)]
         public async Task<ActionResult<ApplicationUserDto>> Get(int id)
         {
-            return Ok(await _userBL.Get(id));
+            var user = await _userBusinessLogic.Get(id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
     }
 }

@@ -24,9 +24,9 @@ namespace cibus.infrastructure.Authentication
             IConfiguration configuration)
         {
             _configuration = configuration;
-            _secretKey = _configuration.GetSection("Authentication:Jwt_Secret").ToString();
-            _audience = _configuration.GetSection("Authentication:Audience").ToString();
-            _issuer = _configuration.GetSection("Authentication:Issuer").ToString();
+            _secretKey = _configuration.GetSection("Authentication:Jwt_Secret").Value;
+            _audience = _configuration.GetSection("Authentication:Audience").Value;
+            _issuer = _configuration.GetSection("Authentication:Issuer").Value;
         }
 
         public string GenerateToken(
@@ -38,9 +38,11 @@ namespace cibus.infrastructure.Authentication
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, userId.ToString())
+                    new Claim("userId", userId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
+                Audience = _audience,
+                Issuer = _issuer,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
             };
@@ -50,28 +52,6 @@ namespace cibus.infrastructure.Authentication
             var token = tokenHandler.WriteToken(securityToken);
 
             return token;
-
-            // TODO:: Legacy code - review and refactor needs here
-            //var claims = new Claim[]
-            //{
-            //    new(JwtRegisteredClaimNames.Sub, vwUserRoles?.UserId.ToString())
-            //};
-
-            //var signingCredentials = new SigningCredentials(
-            //    new SymmetricSecurityKey(
-            //        Encoding.UTF8.GetBytes(_secretKey)),
-            //    SecurityAlgorithms.HmacSha256);
-
-            //var token = new JwtSecurityToken(
-            //    _issuer,
-            //    _audience,
-            //    claims,
-            //    null,
-            //    DateTime.UtcNow.AddHours(1),
-            //    signingCredentials);
-
-            //string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-            //return tokenValue;
         }
     }
 }

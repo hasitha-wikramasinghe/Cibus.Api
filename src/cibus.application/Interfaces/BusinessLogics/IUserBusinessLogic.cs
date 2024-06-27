@@ -1,4 +1,6 @@
-﻿using cibus.application.DTOs;
+﻿#nullable enable
+
+using cibus.application.DTOs;
 using cibus.domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace cibus.application.Interfaces.BusinessLogics
 {
-    public interface IUserBL
+    public interface IUserBusinessLogic
     {
-        Task<List<ApplicationUserDto>> Get();
-        Task<ApplicationUserDto> Get(int id);
-        Task<ApplicationUserDto> Get(string email);
+        Task<List<ApplicationUserDto>?> Get();
+        Task<ApplicationUserDto?> Get(int id);
+        Task<ApplicationUserDto?> Get(string email);
         Task<bool> IsEmailAlreadyExists(string email);
 
         Task<int> CreateUser(ApplicationUserDto applicationUserDTO);

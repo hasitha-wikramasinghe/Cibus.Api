@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿#nullable enable
+
+using AutoMapper;
 using cibus.application.DTOs;
 using cibus.application.Interfaces.BusinessLogics;
 using cibus.application.Interfaces.Repositories;
@@ -14,38 +16,38 @@ using System.Threading.Tasks;
 
 namespace cibus.application.BusinessLogics
 {
-    public class UserBL : IUserBL
+    public class UserBusinessLogic : IUserBusinessLogic
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IPasswordSecurityService _passwordSecurityService;
         private readonly ITokenService _tokenService;
-        public UserBL(
-            IUserRepository userRepo, 
+        public UserBusinessLogic(
+            IUserRepository userRepository, 
             IMapper mapper,
             IPasswordSecurityService passwordSecurityService,
             ITokenService tokenService
             )
         {
-            _userRepo = userRepo;
+            _userRepository = userRepository;
             _mapper = mapper;
             _passwordSecurityService = passwordSecurityService;
             _tokenService = tokenService;
         }
 
-        public async Task<List<ApplicationUserDto>> Get()
+        public async Task<List<ApplicationUserDto>?> Get()
         {
-            return _mapper.Map<List<ApplicationUserDto>>(await _userRepo.Get());
+            return _mapper.Map<List<ApplicationUserDto>>(await _userRepository.Get());
         }
 
-        public async Task<ApplicationUserDto> Get(int id)
+        public async Task<ApplicationUserDto?> Get(int id)
         {
-            return _mapper.Map<ApplicationUserDto>(await _userRepo.Get(id));
+            return _mapper.Map<ApplicationUserDto>(await _userRepository.Get(id));
         }
 
-        public async Task<ApplicationUserDto> Get(string email)
+        public async Task<ApplicationUserDto?> Get(string email)
         {
-            return _mapper.Map<ApplicationUserDto>(await _userRepo.Get(email));
+            return _mapper.Map<ApplicationUserDto>(await _userRepository.Get(email));
         }
 
         public async Task<int> CreateUser(ApplicationUserDto appUserDTO)
@@ -53,19 +55,19 @@ namespace cibus.application.BusinessLogics
             ApplicationUser applicationUser = _mapper.Map<ApplicationUser>(appUserDTO);
             SetPasswordHashAndPasswordSalt(applicationUser, appUserDTO.Password);
 
-            return await _userRepo.CreateUser(applicationUser);
+            return await _userRepository.CreateUser(applicationUser);
         }
 
         public async Task<bool> IsEmailAlreadyExists(string email)
         {
-            return await _userRepo.IsEmailAlreadyExists(email);
+            return await _userRepository.IsEmailAlreadyExists(email);
         }
 
         public async Task<Dictionary<int, string>> Authenticate(SigninDto signinDto)
         {
             Dictionary<int, string> status = new Dictionary<int, string>();
 
-            var user = await _userRepo.Get(signinDto.Email);
+            var user = await _userRepository.Get(signinDto.Email);
             if (user == null)
             {
                 status.Add(-1, "Invalid email, Please try again with a valid email address.");

@@ -28,8 +28,8 @@ namespace cibus.application
             service.AddSingleton(mapper);
 
             #region Business Logic
-            service.AddScoped<IUserBL, UserBL>();
-            service.AddSingleton<IPermissionBL, PermissionBL>();
+            service.AddScoped<IUserBusinessLogic, UserBusinessLogic>();
+            service.AddSingleton<IPermissionBusinessLogic, PermissionBusinessLogic>();
             #endregion
 
             #region Repositories
