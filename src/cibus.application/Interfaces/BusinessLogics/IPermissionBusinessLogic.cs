@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cibus.application.Interfaces.BusinessLogics
 {
-    public interface IPermissionBL
+    public interface IPermissionBusinessLogic
     {
         Task<IEnumerable<string>> GetPermissionsByUserIdAsync(int userId);
     }

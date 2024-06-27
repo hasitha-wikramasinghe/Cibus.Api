@@ -13,18 +13,18 @@ namespace cibus.api.Authentication
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IUserBL _userBL;
-        public AuthenticationController(IUserBL userBL)
+        private readonly IUserBusinessLogic _userBusinessLogic;
+        public AuthenticationController(IUserBusinessLogic userBusinessLogic)
         {
-            _userBL = userBL;
+            _userBusinessLogic = userBusinessLogic;
         }
 
         [HttpPost("Signup")]
         public async Task<ActionResult> Register(ApplicationUserDto applicationUserDto)
         {
-            if (await _userBL.IsEmailAlreadyExists(applicationUserDto.Email)) return BadRequest("Email is already taken, please try with another email.");
+            if (await _userBusinessLogic.IsEmailAlreadyExists(applicationUserDto.Email)) return BadRequest("Email is already taken, please try with another email.");
 
-            int createdUserId = await _userBL.CreateUser(applicationUserDto);
+            int createdUserId = await _userBusinessLogic.CreateUser(applicationUserDto);
             if (createdUserId > 0)
             {
                 return Ok(new { CreatedUserId = createdUserId });
@@ -37,7 +37,7 @@ namespace cibus.api.Authentication
         public async Task<ActionResult> Authenticate(SigninDto signinDto)
         {
 
-            var validator = await _userBL.Authenticate(signinDto);
+            var validator = await _userBusinessLogic.Authenticate(signinDto);
 
             if (validator.ContainsKey(-1) || validator.ContainsKey(0))
             {

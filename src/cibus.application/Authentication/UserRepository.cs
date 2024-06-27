@@ -1,4 +1,6 @@
-﻿using AutoMapper.Configuration;
+﻿#nullable enable
+
+using AutoMapper.Configuration;
 using Dapper;
 using cibus.application.DTOs;
 using cibus.application.Interfaces.Context;
@@ -24,7 +26,7 @@ namespace cibus.application.Authentication
             _context = context;
         }
 
-        public async Task<ApplicationUser> Get(int id)
+        public async Task<ApplicationUser?> Get(int id)
         {
             var getApplicationUserByIdQuery = AuthenticationScripts.GetApplicationUserByIdQuery;
             using (var connection = _context.CreateConnection())
@@ -33,12 +35,11 @@ namespace cibus.application.Authentication
                     new
                     {
                         id
-                    })
-                    ?? throw new ArgumentOutOfRangeException($"No user found for id: {id}");
+                    });
             }
         }
 
-        public async Task<List<ApplicationUser>> Get()
+        public async Task<List<ApplicationUser>?> Get()
         {
             var getAllApplicationUsersQuery = AuthenticationScripts.GetAllApplicationUsersQuery;
             using (var connection = _context.CreateConnection())
@@ -48,7 +49,7 @@ namespace cibus.application.Authentication
             }
         }
 
-        public async Task<ApplicationUser> Get(string email)
+        public async Task<ApplicationUser?> Get(string email)
         {
             var getApplicationUserByEmailQuery = AuthenticationScripts.GetApplicationUserByEmailQuery;
             using (var connection = _context.CreateConnection())
@@ -89,20 +90,6 @@ namespace cibus.application.Authentication
                 }
             }
             return false;
-        }
-
-        public async Task<vwUserRoles> GetUserRole(int userId)
-        {
-            var getUserRoleByUserIdQuery = AuthenticationScripts.GetUserRoleByUserIdQuery;
-            using (var connection = _context.CreateConnection())
-            {
-                var userRoles = await connection.QueryAsync<vwUserRoles>(getUserRoleByUserIdQuery,
-                    new
-                    {
-                        userId
-                    });
-                return userRoles.FirstOrDefault();
-            }
         }
     }
 }
