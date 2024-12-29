@@ -38,6 +38,7 @@ namespace cibus.api.Authentication
         [HasPermission(Permission.AccessUser)]
         public async Task<ActionResult<ApplicationUserDto>> Get(int id)
         {
+            // Test comment
             var user = await _userBusinessLogic.Get(id);
 
             if (user is null)
