@@ -1,19 +1,19 @@
 ﻿CREATE TABLE Product(
-	Id INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
-	ProductName VARCHAR(150) NOT NULL,
-	ProductCode VARCHAR(150) NULL,
-	Price DECIMAL NOT NULL,
-	ProductImage VARCHAR(MAX) NULL,
-	ProductDescription VARCHAR(MAX) NULL,
-	IsAvailable BIT NOT NULL DEFAULT 0,
-	IsDeleted BIT NOT NULL DEFAULT 0,
-	CreatedBy INT NULL,
-	CreatedOn DATE NULL,
-	ModifiedBy INT NULL,
-	ModifiedOn DATE NULL,
+	[Id] INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
+	[Name] VARCHAR(150) NOT NULL,
+	[Code] VARCHAR(150) NULL,
+	[Price] DECIMAL NOT NULL,
+	[ImageUrl] VARCHAR(MAX) NULL,
+	[Description] VARCHAR(MAX) NULL,
+	[IsAvailable] BIT NOT NULL DEFAULT 0,
+	[IsDeleted] BIT NOT NULL DEFAULT 0,
+	[CreatedBy] INT NULL,
+	[CreatedOn] DATE NULL,
+	[ModifiedBy] INT NULL,
+	[ModifiedOn] DATE NULL,
 
-	CategoryId INT FOREIGN KEY REFERENCES Category(Id) NULL,
-	EntityId INT NULL,
+	[CategoryId] INT FOREIGN KEY REFERENCES Category(Id) NULL,
+	[EntityId] INT NULL,
 
 	CONSTRAINT FK_Product_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );

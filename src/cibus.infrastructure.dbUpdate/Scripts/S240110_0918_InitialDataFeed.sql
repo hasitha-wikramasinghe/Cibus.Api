@@ -1,4 +1,4 @@
-Insert Into Entity (EntityName) values ('Cibus');
+Insert Into Entity ([Name]) values ('Cibus');
 Go
 
 Insert Into ApplicationUser (Email, PasswordHash, PasswordSalt, FirstName, LastName, NIC, DOB, EntityId) 
@@ -11,7 +11,7 @@ CONVERT(VARBINARY(MAX), '0xC5090DDF38FF9803DBA7053986983E8A624C7099611B760FDBC5A
 '980223175V', 
 '1998-01-22', 
 Id
-From Entity Where EntityName = 'Cibus';
+From Entity Where [Name] = 'Cibus';
 Go
 
 CREATE TABLE #TempPermissions (
@@ -30,7 +30,7 @@ VALUES
 Go
 
 SET IDENTITY_INSERT Permission ON;
-Insert Into Permission (Id, PermissionName, EntityId) 
+Insert Into Permission ([Id], [Name], [EntityId]) 
 Select TP.Id, TP.PermissionName, U.EntityId
 From #TempPermissions As TP
 Cross Join ApplicationUser As U
@@ -48,7 +48,7 @@ CREATE TABLE #TempRoles (
 );
 Go
 
-INSERT INTO #TempRoles (Id, RoleName)
+INSERT INTO #TempRoles ([Id], [RoleName])
 VALUES 
 ('1000', 'SuperAdmin'),
 ('1001', 'Manager'),
@@ -57,7 +57,7 @@ Go
 
 SET IDENTITY_INSERT [dbo].[Role] ON;
 
-Insert Into [dbo].[Role] (Id, RoleName, EntityId) 
+Insert Into [dbo].[Role] ([Id], [Name], [EntityId]) 
 Select TR.Id, TR.RoleName, U.EntityId
 From #TempRoles As TR
 Cross Join ApplicationUser As U

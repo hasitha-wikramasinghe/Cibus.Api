@@ -47,7 +47,7 @@ namespace cibus.api
             services.RegisterInfrastructureServices(Configuration);
             services.RegisterDbUpServices(Configuration);
 
-            var key = Encoding.UTF8.GetBytes(Configuration["Authentication:Jwt_Secret"].ToString());
+            var key = Encoding.UTF8.GetBytes(Configuration["Authentication:Jwt_Secret"]);
 
             services.AddAuthentication(x =>
             {

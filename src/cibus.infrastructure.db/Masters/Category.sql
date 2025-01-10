@@ -1,11 +1,11 @@
 ﻿CREATE TABLE Category(
-	Id INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
-	CategoryName VARCHAR(150) NOT NULL,
-	IsDeleted BIT NOT NULL DEFAULT 0,
-	CreatedBy INT NULL,
-	CreatedOn DATE NULL,
-	ModifiedBy INT NULL,
-	EntityId INT NULL,
+	[Id] INT PRIMARY KEY IDENTITY(1000, 1) NOT NULL,
+	[Name] VARCHAR(150) NOT NULL,
+	[IsDeleted] BIT NOT NULL DEFAULT 0,
+	[CreatedBy] INT NULL,
+	[CreatedOn] DATE NULL,
+	[ModifiedBy] INT NULL,
+	[EntityId] INT NULL,
 
 	CONSTRAINT FK_Category_Entity FOREIGN KEY (EntityId) REFERENCES Entity(Id)
 );
