@@ -34,17 +34,18 @@ namespace cibus.infrastructure.Authentication
         {
             IdentityOptions _options = new IdentityOptions();
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("userId", userId.ToString())
+                    new Claim(JwtRegisteredClaimNames.Sub, userId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 Audience = _audience,
                 Issuer = _issuer,
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey)), SecurityAlgorithms.HmacSha256)
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

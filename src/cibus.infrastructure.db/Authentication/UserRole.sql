@@ -1,14 +1,14 @@
 ﻿CREATE TABLE UserRole
 (
-	UserId INT FOREIGN KEY REFERENCES ApplicationUser(Id) NOT NULL,
-	RoleId INT FOREIGN KEY REFERENCES Role(Id) NOT NULL,
-	EntityId INT NULL,
+	[UserId] INT FOREIGN KEY REFERENCES ApplicationUser(Id) NOT NULL,
+	[RoleId] INT FOREIGN KEY REFERENCES Role(Id) NOT NULL,
+	[EntityId] INT NULL,
 
-	IsDeleted BIT NOT NULL DEFAULT 0,
-	CreatedBy INT NULL,
-	CreatedOn DATE NULL,
-	ModifiedBy INT NULL,
-	ModifiedOn DATE NULL,
+	[IsDeleted] BIT NOT NULL DEFAULT 0,
+	[CreatedBy] INT NULL,
+	[CreatedOn] DATE NULL,
+	[ModifiedBy] INT NULL,
+	[ModifiedOn] DATE NULL,
 
 	CONSTRAINT PK_UserRole PRIMARY KEY(UserId, RoleId),
 	CONSTRAINT FK_UserRole FOREIGN KEY (EntityId) REFERENCES Entity(Id)

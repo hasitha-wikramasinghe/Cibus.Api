@@ -2,8 +2,8 @@
 SELECT 
 RolePermission.RoleId, 
 RolePermission.PermissionId, 
-Role.RoleName,
-Permission.PermissionName,
+Role.Name RoleName, 
+Permission.Name PermissionName,
 UserRole.UserId UserId
 FROM [dbo].[RolePermission]
 INNER JOIN [dbo].[UserRole] ON RolePermission.RoleId = UserRole.RoleId AND RolePermission.EntityId = UserRole.EntityId
